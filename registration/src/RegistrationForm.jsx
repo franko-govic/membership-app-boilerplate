@@ -33,8 +33,8 @@ function RegistrationForm() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col text-center p-10 bg-gray">
-      <h1 className="w-full text-3xl p-5 text-orange-500 font-bold">
+    <div className="h-full w-full flex flex-col text-center p-6 md:p-10 bg-gray">
+      <h1 className="w-full text-3xl p-2 md:p-5 text-orange-500 font-bold">
         UČLANI SE
       </h1>
 
@@ -50,7 +50,7 @@ function RegistrationForm() {
         onSubmit={handleSubmit}
       >
         {({ setFieldValue, values }) => (
-          <Form className="flex-1 w-full flex flex-col  justify-between text-left py-2 gap-2 md:py-10">
+          <Form className="flex-1 w-full flex flex-col justify-between text-left py-2">
             <div className="w-full">
               <Field
                 type="text"
