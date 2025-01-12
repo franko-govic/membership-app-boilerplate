@@ -2,12 +2,12 @@ import slika from "./Assets/grafika.png";
 
 function Graphic() {
   return (
-    <div className="relative w-full h-full bg-black">
+    <div className="relative w-full h-full bg-black overflow-hidden">
       <div className="absolute inset-0">
         <img 
           src={slika} 
           alt="Background"
-          className="w-full h-full object-top brightness-50 blur-sm"
+          className="w-full h-full object-fill brightness-50 blur-sm"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60" />
       </div>
@@ -17,8 +17,7 @@ function Graphic() {
                          tracking-tight leading-none
                          drop-shadow-2xl
                          bg-gradient-to-b from-white via-white to-orange-200
-                         bg-clip-text text-transparent
-                         animate-fade-in">
+                         bg-clip-text text-transparent">
             ZA RODNI GRAD
           </h1>
         </div>
@@ -27,23 +26,5 @@ function Graphic() {
     </div>
   );
 }
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 1s ease-out forwards;
-  }
-`;
-document.head.appendChild(style);
 
 export default Graphic;
