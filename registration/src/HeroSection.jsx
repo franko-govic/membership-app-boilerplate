@@ -1,13 +1,13 @@
 import slika from "./Assets/grafika.png";
 
-function Graphic() {
+function HeroSection() {
   return (
     <div className="relative w-full h-full bg-black overflow-hidden">
       <div className="absolute inset-0">
         <img 
           src={slika} 
           alt="Background"
-          className="w-full h-full object-fill brightness-50 blur-sm"
+          className="w-full h-full object-scale-down md:object-fill brightness-50 blur-sm"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60" />
       </div>
@@ -27,4 +27,4 @@ function Graphic() {
   );
 }
 
-export default Graphic;
+export default HeroSection;
