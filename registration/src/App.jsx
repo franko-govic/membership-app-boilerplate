@@ -1,15 +1,17 @@
-import Graphic from "./Graphic";
-import RegistrationForm from "./RegistrationForm";
+import HeroSection from "./HeroSection";
+import RegistrationSection from "./RegistrationSection";
 
 function App() {
   return (
-    <div className="w-full min-h-dvh bg-gray-900">
-      <div className="flex flex-col-reverse md:flex-row w-full min-h-screen">
-        <div className="flex-1 order-2 md:order-1">
-          <RegistrationForm />
+    <div className="w-full h-screen bg-gray-900">
+      <div className="h-screen overflow-y-auto scroll-smooth snap-y snap-mandatory hide-scrollbar">
+        <div className="w-full h-screen shrink-0 snap-start snap-always">
+          <HeroSection />
         </div>
-        <div className="h-[50vh] md:h-screen md:w-1/2 order-1 md:order-2">
-          <Graphic />
+        <div className="w-full h-screen shrink-0 snap-start snap-always overflow-y-auto">
+          <div className="min-h-full">
+          <RegistrationSection />
+          </div>
         </div>
       </div>
     </div>
