@@ -3,11 +3,11 @@ import RegistrationForm from "./RegistrationForm";
 
 function App() {
   return (
-    <div className="flex w-screen h-screen">
-      <div className="w-1/2 h-full">
+    <div className="flex flex-col w-screen h-screen md:flex-row">
+      <div className="w-full h-full md:w-1/2 ">
         <RegistrationForm />
       </div>
-      <div className="h-full w-1/2">
+      <div className="w-full h-full  md:w-1/2">
         <Graphic />
       </div>
     </div>

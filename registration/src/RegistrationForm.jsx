@@ -50,7 +50,7 @@ function RegistrationForm() {
         onSubmit={handleSubmit}
       >
         {({ setFieldValue, values }) => (
-          <Form className="flex-1 w-full flex flex-col justify-between text-left py-6">
+          <Form className="flex-1 w-full flex flex-col  justify-between text-left py-2 gap-2 md:py-10">
             <div className="w-full">
               <Field
                 type="text"
