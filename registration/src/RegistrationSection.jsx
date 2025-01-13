@@ -23,35 +23,67 @@ function RegistrationSection() {
     mobitel: Yup.string().matches(/^[0-9]+$/, "Unesite samo brojeve"),
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    setTimeout(() => {
+      console.log(values);
+      resetForm();
+      setSubmitting(false);
+
+      emailjs
+        .send(
+          "service_h7k60gm", //  service ID
+          "template_8jpche7", //  template ID for admin email
+          {
+            ime: values.ime,
+            prezime: values.prezime,
+            email: values.email,
+            datum: values.datum,
+            mobitel: values.mobitel,
+            adresa: values.adresa,
+          },
+          "_Tdxv6Pckg-4Fa88p" // public_key
+        )
+        .then(
+          (response) => {
+            console.log("SUCCESS! Main email sent.", response);
+
+            emailjs
+              .send(
+                "service_h7k60gm", //  service ID
+                "template_krlln3k", // Template for auto-reply
+                {
+                  ime: values.ime,
+                  prezime: values.prezime,
+                  email: values.email,
+                  datum: values.datum,
+                  mobitel: values.mobitel,
+                  adresa: values.adresa,
+                },
+                "_Tdxv6Pckg-4Fa88p" // public key
+              )
+              .then(
+                (autoReplyResponse) => {
+                  console.log(
+                    "Auto-reply sent successfully!",
+                    autoReplyResponse
+                  );
+                },
+                (error) => {
+                  console.log("Auto-reply failed...", error);
+                  alert(
+                    "Nešto je pošlo po krivu prilikom slanja automatskog odgovora."
+                  );
+                }
+              );
+          },
+          (error) => {
+            console.log("FAILED... Error sending main email", error);
+            alert("Nešto je pošlo po krivu. Pokušajte ponovno.");
+          }
+        );
+    }, 500);
     console.log("Form submitted with values", values);
-  
-    emailjs
-      .send(
-        "service_h7k60gm",
-        "template_8jpche7",
-        {
-          ime: values.ime,
-          prezime: values.prezime,
-          email: values.email,
-          datum: values.datum,
-          mobitel: values.mobitel,
-          adresa: values.adresa,
-        },
-        "_Tdxv6Pckg-4Fa88p"
-      )
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response);
-          alert("Podaci uspješno poslani. Hvala na učlanjenju!");
-        },
-        (error) => {
-          console.log("FAILED...", error);
-          alert("Nešto je pošlo po krivu. Pokušajte ponovno.");
-        }
-      );
   };
-  
 
   const inputClasses = `
     w-full p-3 rounded-lg
@@ -87,20 +119,22 @@ function RegistrationSection() {
                 UN Funcuti Šibenik započinje s učlanjivanjem za 2025. godinu.
               </p>
               <p>
-                Već dugi niz godina financiramo se i sve troškove rada pokrivamo iz
-                vlastitih sredstava. Kroz članarinu direktno pomažete radu Udruge,
-                a dužnost svakog tko se naziva Funcutom je da ima vlastitu člansku
-                iskaznicu.
+                Već dugi niz godina financiramo se i sve troškove rada pokrivamo
+                iz vlastitih sredstava. Kroz članarinu direktno pomažete radu
+                Udruge, a dužnost svakog tko se naziva Funcutom je da ima
+                vlastitu člansku iskaznicu.
               </p>
-              <p>Od ove godine uz člansku iskaznicu uvodimo i dodatne pogodnosti:</p>
+              <p>
+                Od ove godine uz člansku iskaznicu uvodimo i dodatne pogodnosti:
+              </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>
                   Ulaznice za našu tribinu moći će se kupiti isključivo uz
                   predočenje članske iskaznice, i to po povoljnijoj cijeni
                 </li>
                 <li>
-                  Uz iskaznicu dobivate poklon bon za 10% popusta u našem webshopu
-                  koji uskoro otvaramo
+                  Uz iskaznicu dobivate poklon bon za 10% popusta u našem
+                  webshopu koji uskoro otvaramo
                 </li>
                 <li>Svaki član dobiva i prigodni poklon paket</li>
               </ul>
@@ -153,7 +187,9 @@ function RegistrationSection() {
                     name="prezime"
                     placeholder="Unesite vaše prezime"
                     className={`${inputClasses} ${
-                      touched.prezime && errors.prezime ? "border-orange-500" : ""
+                      touched.prezime && errors.prezime
+                        ? "border-orange-500"
+                        : ""
                     }`}
                   />
                   <ErrorMessage
@@ -233,7 +269,9 @@ function RegistrationSection() {
                     name="mobitel"
                     placeholder="Unesite broj mobitela"
                     className={`${inputClasses} ${
-                      touched.mobitel && errors.mobitel ? "border-orange-500" : ""
+                      touched.mobitel && errors.mobitel
+                        ? "border-orange-500"
+                        : ""
                     }`}
                   />
                   <ErrorMessage
