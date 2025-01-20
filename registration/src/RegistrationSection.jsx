@@ -33,6 +33,15 @@ function RegistrationSection() {
       setSubmitting(false);
 
       const birthDate = new Date(values.datum);
+
+      // Check if the birth date is valid
+      if (isNaN(birthDate.getTime())) {
+        console.log("Invalid birthdate");
+        alert("Unesite ispravan datum rođenja");
+        return; // Stop further execution
+      }
+
+      // Calculate the age
       let age = new Date().getFullYear() - birthDate.getFullYear();
       const monthDiff = new Date().getMonth() - birthDate.getMonth();
       if (
@@ -42,29 +51,33 @@ function RegistrationSection() {
         age--;
       }
 
+      // Handle case when age is 0 or invalid
+      if (age <= 0) {
+        console.log(
+          "Age is 0, maybe the user is too young or the birthdate is invalid"
+        );
+        age = "N/A"; // Or any default message like "Too young"
+      }
+
+      // Define image URLs
       const image1Url =
         "https://membership-app-bay.vercel.app/Assets/slika1.png";
       const image2Url =
         "https://membership-app-bay.vercel.app/Assets/slika2.png";
-      const image3Url =
-        "https://membership-app-bay.vercel.app/Assets/slika3.png";
 
-      const selectedImageUrl =
-        values.lokacija === "inozemstvo"
-          ? image3Url
-          : age < 18
-          ? image1Url
-          : image2Url;
+      // Select the image based only on the age
+      const selectedImageUrl = age < 18 ? image1Url : image2Url;
 
       const obavijestZaInozemstvo =
         values.lokacija === "inozemstvo"
-          ? "Uz podatkse barcoda morate unijeti i SWIFT CODE: ZABAHR2X."
+          ? "Uz podatke barcoda morate unijeti i SWIFT CODE: ZABAHR2X."
           : "";
 
+      // Send main email
       emailjs
         .send(
-          "service_h7k60gm", // service ID
-          "template_8jpche7", // template ID for admin email
+          "service_h7k60gm",
+          "template_8jpche7",
           {
             ime: values.ime,
             prezime: values.prezime,
@@ -72,11 +85,8 @@ function RegistrationSection() {
             datum: values.datum,
             mobitel: values.mobitel,
             adresa: values.adresa,
-            dob: age,
-            lokacija: values.lokacija,
-            obavijestZaInozemstvo: obavijestZaInozemstvo,
           },
-          "_Tdxv6Pckg-4Fa88p" // public key
+          "_Tdxv6Pckg-4Fa88p"
         )
         .then(
           (response) => {
@@ -84,8 +94,8 @@ function RegistrationSection() {
 
             emailjs
               .send(
-                "service_h7k60gm", // service ID
-                "template_krlln3k", // Template for auto-reply
+                "service_h7k60gm",
+                "template_krlln3k",
                 {
                   ime: values.ime,
                   prezime: values.prezime,
@@ -95,9 +105,10 @@ function RegistrationSection() {
                   adresa: values.adresa,
                   imageUrl: selectedImageUrl,
                   lokacija: values.lokacija,
-                  customMessage: obavijestZaInzomestvo,
+                  dob: age,
+                  obavijestZaInozemstvo: obavijestZaInozemstvo,
                 },
-                "_Tdxv6Pckg-4Fa88p" // public key
+                "_Tdxv6Pckg-4Fa88p"
               )
               .then(
                 (autoReplyResponse) => {
