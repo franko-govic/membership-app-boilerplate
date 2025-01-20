@@ -21,6 +21,9 @@ function RegistrationSection() {
       .max(new Date(), "Datum ne može biti u budućnosti")
       .typeError("Unesite valjan datum"),
     mobitel: Yup.string().matches(/^[0-9]+$/, "Unesite samo brojeve"),
+    lokacija: Yup.string()
+      .required("Molimo odaberite status korisnika")
+      .oneOf(["hrvatska", "inozemstvo"], "Morate odabrati lokaciju"),
   });
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
@@ -29,11 +32,8 @@ function RegistrationSection() {
       resetForm();
       setSubmitting(false);
 
-      // Calculate age from the birthdate (datum)
       const birthDate = new Date(values.datum);
       let age = new Date().getFullYear() - birthDate.getFullYear();
-
-      // If the user hasn't had their birthday this year yet, subtract one from their age
       const monthDiff = new Date().getMonth() - birthDate.getMonth();
       if (
         monthDiff < 0 ||
@@ -42,16 +42,25 @@ function RegistrationSection() {
         age--;
       }
 
-      // Choose image URL based on age
       const image1Url =
-        "https://membership-app-bay.vercel.app/Assets/image1.png"; // Image for under 18
+        "https://membership-app-bay.vercel.app/Assets/slika1.png";
       const image2Url =
-        "https://membership-app-bay.vercel.app/Assets/image2.png"; // Image for 18 and over
+        "https://membership-app-bay.vercel.app/Assets/slika2.png";
+      const image3Url =
+        "https://membership-app-bay.vercel.app/Assets/slika3.png";
 
-      // If the user is under 18, send image1; otherwise, send image2
-      const selectedImageUrl = age < 18 ? image1Url : image2Url;
+      const selectedImageUrl =
+        values.lokacija === "inozemstvo"
+          ? image3Url
+          : age < 18
+          ? image1Url
+          : image2Url;
 
-      // Send the main email with the selected image URL
+      const obavijestZaInzomestvo =
+        values.lokacija === "inozemstvo"
+          ? "Uz podatkse barcoda morate unijeti i SWIFT CODE: ZABAHR2X."
+          : "";
+
       emailjs
         .send(
           "service_h7k60gm", // service ID
@@ -63,8 +72,9 @@ function RegistrationSection() {
             datum: values.datum,
             mobitel: values.mobitel,
             adresa: values.adresa,
-            image1Url, // Send the first image URL (for use in the template if needed)
-            image2Url, // Send the second image URL (for use in the template if needed)
+            dob: values.age,
+            lokacija: values.lokacija,
+            obavijestZaInzomestvo: obavijestZaInzomestvo,
           },
           "_Tdxv6Pckg-4Fa88p" // public key
         )
@@ -72,7 +82,6 @@ function RegistrationSection() {
           (response) => {
             console.log("SUCCESS! Main email sent.", response);
 
-            // Send auto-reply with the selected image
             emailjs
               .send(
                 "service_h7k60gm", // service ID
@@ -84,7 +93,9 @@ function RegistrationSection() {
                   datum: values.datum,
                   mobitel: values.mobitel,
                   adresa: values.adresa,
-                  imageUrl: selectedImageUrl, // Send the selected image URL in the auto-reply
+                  imageUrl: selectedImageUrl,
+                  lokacija: values.lokacija,
+                  customMessage: obavijestZaInzomestvo,
                 },
                 "_Tdxv6Pckg-4Fa88p" // public key
               )
@@ -180,6 +191,7 @@ function RegistrationSection() {
               email: "",
               mobitel: "",
               adresa: "",
+              lokacija: "",
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -310,6 +322,29 @@ function RegistrationSection() {
                   />
                 </div>
 
+                <div>
+                  <label className={labelClasses}>Lokacija*</label>
+                  <div
+                    role="group"
+                    aria-labelledby="status"
+                    className="flex gap-5"
+                  >
+                    <label className="inline-flex items-center space-x-3">
+                      <Field type="radio" name="lokacija" value="hrvatska" />
+                      <span className="text-gray-300">Hrvatska</span>
+                    </label>
+                    <label className="inline-flex items-center space-x-3">
+                      <Field type="radio" name="lokacija" value="inozemstvo" />
+                      <span className="text-gray-300">Inozemstvo</span>
+                    </label>
+                  </div>
+                  <ErrorMessage
+                    name="lokacija"
+                    component="div"
+                    className={errorClasses}
+                  />
+                </div>
+
                 <div className="pt-3">
                   <button
                     type="submit"
@@ -322,7 +357,7 @@ function RegistrationSection() {
                         : "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-orange-500/20"
                     }`}
                   >
-                    Pošalji podatke
+                    Pošaljite podatke
                   </button>
                 </div>
               </Form>
