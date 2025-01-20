@@ -1,6 +1,8 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RegistrationSection() {
   const validationSchema = Yup.object().shape({
@@ -63,7 +65,6 @@ function RegistrationSection() {
       const slika3Url =
         "https://membership-app-bay.vercel.app/Assets/slika3.png";
 
-      // If the location is "inozemstvo", select image3Url, regardless of age
       const selectedImageUrl =
         values.lokacija === "inozemstvo"
           ? slika3Url
@@ -126,10 +127,30 @@ function RegistrationSection() {
                   );
                 }
               );
+
+            // Triggering success toast
+            toast.success("ŠF - Podatci uspješno poslani", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "light",
+            });
           },
           (error) => {
             console.log("FAILED... Error sending main email", error);
-            alert("Nešto je pošlo po krivu. Pokušajte ponovno.");
+            toast.error("❌ Nešto je pošlo po krivu. Pokušajte ponovno.", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "light",
+              transition: Bounce,
+            });
           }
         );
     }, 500);
@@ -162,6 +183,15 @@ function RegistrationSection() {
       id="registration-section"
     >
       <div className="min-h-full w-full flex flex-col md:flex-row">
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          closeOnClick={false}
+          pauseOnHover
+          draggable
+          theme="light"
+        />
         <div className="w-full md:w-1/2 p-6 md:p-12 lg:p-16 flex items-center">
           <div className="w-full space-y-6">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
