@@ -177,20 +177,32 @@ function RegistrationSection() {
                 Udruge, a dužnost svakog tko se naziva Funcutom je da ima
                 vlastitu člansku iskaznicu.
               </p>
-              <p>
-                Od ove godine uz člansku iskaznicu uvodimo i dodatne pogodnosti:
-              </p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>
-                  Ulaznice za našu tribinu moći će se kupiti isključivo uz
-                  predočenje članske iskaznice, i to po povoljnijoj cijeni
-                </li>
-                <li>
-                  Uz iskaznicu dobivate poklon bon za 10% popusta u našem
-                  webshopu koji uskoro otvaramo
-                </li>
-                <li>Svaki član dobiva i prigodni poklon paket</li>
-              </ul>
+              <div></div>
+              <div>
+                <p>
+                  Od ove godine uz člansku iskaznicu uvodimo i dodatne
+                  pogodnosti:
+                </p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>
+                    Ulaznice za našu tribinu moći će se kupiti isključivo uz
+                    predočenje članske iskaznice, i to po povoljnijoj cijeni
+                  </li>
+                  <li>
+                    Uz iskaznicu dobivate poklon bon za 10% popusta u našem
+                    webshopu koji uskoro otvaramo
+                  </li>
+                  <li>Svaki član dobiva i prigodni poklon paket</li>
+                </ul>
+              </div>
+              <div>
+                <p>Iznos članarine:</p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>mlađi od 18 - 15€</li>
+                  <li>stariji od 18 - 20€</li>
+                  <li>za inozemstvo - 25€</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
