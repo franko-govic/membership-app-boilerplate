@@ -56,7 +56,7 @@ function RegistrationSection() {
           ? image1Url
           : image2Url;
 
-      const obavijestZaInzomestvo =
+      const obavijestZaInozemstvo =
         values.lokacija === "inozemstvo"
           ? "Uz podatkse barcoda morate unijeti i SWIFT CODE: ZABAHR2X."
           : "";
@@ -72,9 +72,9 @@ function RegistrationSection() {
             datum: values.datum,
             mobitel: values.mobitel,
             adresa: values.adresa,
-            dob: values.age,
+            dob: age,
             lokacija: values.lokacija,
-            obavijestZaInzomestvo: obavijestZaInzomestvo,
+            obavijestZaInozemstvo: obavijestZaInozemstvo,
           },
           "_Tdxv6Pckg-4Fa88p" // public key
         )
