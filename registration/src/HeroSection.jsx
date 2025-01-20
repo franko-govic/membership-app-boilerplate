@@ -1,6 +1,17 @@
 import slika from "./Assets/grafika.png";
+import { RiArrowDownLine } from "@remixicon/react";
 
 function HeroSection() {
+  const scrollToRegistration = () => {
+    const registrationSection = document.getElementById("registration-section");
+    if (registrationSection) {
+      registrationSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <div className="relative w-full h-full bg-black overflow-hidden">
       <div className="absolute inset-0">
@@ -26,6 +37,13 @@ function HeroSection() {
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent" />
+
+      <div
+        onClick={scrollToRegistration}
+        className="absolute bottom-10 left-1/2 right-1/2 transform -translate-x-1/2 w-fit h-fit rounded-full p-5 text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-orange-500/20 cursor-pointer"
+      >
+        <RiArrowDownLine />
+      </div>
     </div>
   );
 }

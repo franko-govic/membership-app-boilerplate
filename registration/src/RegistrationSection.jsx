@@ -107,7 +107,10 @@ function RegistrationSection() {
   const errorClasses = "text-orange-500 text-sm mt-1";
 
   return (
-    <div className="min-h-dvh w-full bg-gradient-to-br from-gray-700 via-gray-900 to-gray-800 overflow-hidden">
+    <div
+      className="min-h-dvh w-full bg-gradient-to-br from-gray-700 via-gray-900 to-gray-800 overflow-hidden"
+      id="registration-section"
+    >
       <div className="min-h-full w-full flex flex-col md:flex-row">
         <div className="w-full md:w-1/2 p-6 md:p-12 lg:p-16 flex items-center">
           <div className="w-full space-y-6">
