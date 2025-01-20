@@ -29,13 +29,29 @@ function RegistrationSection() {
       resetForm();
       setSubmitting(false);
 
-      // URLs of the hosted images on Vercel
-      const image1Url =
-        "https://membership-app-bay.vercel.app/Assets/image1.png";
-      const image2Url =
-        "https://membership-app-bay.vercel.app/Assets/image2.png";
+      // Calculate age from the birthdate (datum)
+      const birthDate = new Date(values.datum);
+      let age = new Date().getFullYear() - birthDate.getFullYear();
 
-      // Send the main email with image URLs
+      // If the user hasn't had their birthday this year yet, subtract one from their age
+      const monthDiff = new Date().getMonth() - birthDate.getMonth();
+      if (
+        monthDiff < 0 ||
+        (monthDiff === 0 && new Date().getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+
+      // Choose image URL based on age
+      const image1Url =
+        "https://membership-app-bay.vercel.app/Assets/image1.png"; // Image for under 18
+      const image2Url =
+        "https://membership-app-bay.vercel.app/Assets/image2.png"; // Image for 18 and over
+
+      // If the user is under 18, send image1; otherwise, send image2
+      const selectedImageUrl = age < 18 ? image1Url : image2Url;
+
+      // Send the main email with the selected image URL
       emailjs
         .send(
           "service_h7k60gm", // service ID
@@ -47,8 +63,8 @@ function RegistrationSection() {
             datum: values.datum,
             mobitel: values.mobitel,
             adresa: values.adresa,
-            image1Url, // Send the first image URL
-            image2Url, // Send the second image URL
+            image1Url, // Send the first image URL (for use in the template if needed)
+            image2Url, // Send the second image URL (for use in the template if needed)
           },
           "_Tdxv6Pckg-4Fa88p" // public key
         )
@@ -56,7 +72,7 @@ function RegistrationSection() {
           (response) => {
             console.log("SUCCESS! Main email sent.", response);
 
-            // Send auto-reply with image links
+            // Send auto-reply with the selected image
             emailjs
               .send(
                 "service_h7k60gm", // service ID
@@ -68,8 +84,7 @@ function RegistrationSection() {
                   datum: values.datum,
                   mobitel: values.mobitel,
                   adresa: values.adresa,
-                  image1Url,
-                  image2Url,
+                  imageUrl: selectedImageUrl, // Send the selected image URL in the auto-reply
                 },
                 "_Tdxv6Pckg-4Fa88p" // public key
               )
