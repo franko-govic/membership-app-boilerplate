@@ -29,10 +29,17 @@ function RegistrationSection() {
       resetForm();
       setSubmitting(false);
 
+      // URLs of the hosted images on Vercel
+      const image1Url =
+        "https://membership-app-bay.vercel.app/Assets/image1.png";
+      const image2Url =
+        "https://membership-app-bay.vercel.app/Assets/image2.png";
+
+      // Send the main email with image URLs
       emailjs
         .send(
-          "service_h7k60gm", //  service ID
-          "template_8jpche7", //  template ID for admin email
+          "service_h7k60gm", // service ID
+          "template_8jpche7", // template ID for admin email
           {
             ime: values.ime,
             prezime: values.prezime,
@@ -40,16 +47,19 @@ function RegistrationSection() {
             datum: values.datum,
             mobitel: values.mobitel,
             adresa: values.adresa,
+            image1Url, // Send the first image URL
+            image2Url, // Send the second image URL
           },
-          "_Tdxv6Pckg-4Fa88p" // public_key
+          "_Tdxv6Pckg-4Fa88p" // public key
         )
         .then(
           (response) => {
             console.log("SUCCESS! Main email sent.", response);
 
+            // Send auto-reply with image links
             emailjs
               .send(
-                "service_h7k60gm", //  service ID
+                "service_h7k60gm", // service ID
                 "template_krlln3k", // Template for auto-reply
                 {
                   ime: values.ime,
@@ -58,6 +68,8 @@ function RegistrationSection() {
                   datum: values.datum,
                   mobitel: values.mobitel,
                   adresa: values.adresa,
+                  image1Url, // Include image links in auto-reply
+                  image2Url,
                 },
                 "_Tdxv6Pckg-4Fa88p" // public key
               )
@@ -82,7 +94,6 @@ function RegistrationSection() {
           }
         );
     }, 500);
-    console.log("Form submitted with values", values);
   };
 
   const inputClasses = `
