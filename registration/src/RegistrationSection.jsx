@@ -56,12 +56,20 @@ function RegistrationSection() {
         age = "N/A";
       }
 
-      const image1Url =
+      const slika1Url =
         "https://membership-app-bay.vercel.app/Assets/slika1.png";
-      const image2Url =
+      const slika2Url =
         "https://membership-app-bay.vercel.app/Assets/slika2.png";
+      const slika3Url =
+        "https://membership-app-bay.vercel.app/Assets/slika3.png";
 
-      const selectedImageUrl = age < 18 ? image1Url : image2Url;
+      // If the location is "inozemstvo", select image3Url, regardless of age
+      const selectedImageUrl =
+        values.lokacija === "inozemstvo"
+          ? slika3Url
+          : age < 18
+          ? slika1Url
+          : slika2Url;
 
       const obavijestZaInozemstvo =
         values.lokacija === "inozemstvo"
