@@ -68,7 +68,7 @@ function RegistrationSection() {
                   datum: values.datum,
                   mobitel: values.mobitel,
                   adresa: values.adresa,
-                  image1Url, // Include image links in auto-reply
+                  image1Url,
                   image2Url,
                 },
                 "_Tdxv6Pckg-4Fa88p" // public key
