@@ -80,7 +80,7 @@ function RegistrationSection() {
       emailjs
         .send(
           "service_h7k60gm",
-          "template_8jpche7",
+          "template_x25qvhl",
           {
             ime: values.ime,
             prezime: values.prezime,
@@ -98,7 +98,7 @@ function RegistrationSection() {
             emailjs
               .send(
                 "service_h7k60gm",
-                "template_krlln3k",
+                "template_cm2121i",
                 {
                   ime: values.ime,
                   prezime: values.prezime,

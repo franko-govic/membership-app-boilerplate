@@ -1,4 +1,4 @@
-import slika from "../public/Assets/grafika.png";
+import slika from "../public/Assets/random.jpg";
 import { RiArrowDownLine } from "@remixicon/react";
 
 function HeroSection() {
