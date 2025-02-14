@@ -31,7 +31,7 @@ function HeroSection() {
                          bg-gradient-to-b from-white via-white to-orange-200
                          bg-clip-text text-transparent"
           >
-            ZA RODNI GRAD
+            DOBRODOŠLI
           </h1>
         </div>
       </div>

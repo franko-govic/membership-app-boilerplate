@@ -129,7 +129,7 @@ function RegistrationSection() {
               );
 
             // Triggering success toast
-            toast.success("ŠF - Podatci uspješno poslani", {
+            toast.success("‚Udruga - Podatci uspješno poslani", {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -199,13 +199,15 @@ function RegistrationSection() {
             </h1>
             <div className="text-gray-300 space-y-4">
               <p className="text-lg">
-                UN Funcuti Šibenik započinje s učlanjivanjem za 2025. godinu.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem ad
+                inventore perferendis aperiam, labore exercitationem dignissimos
+                dolores quae iure aut.
               </p>
               <p>
-                Već dugi niz godina financiramo se i sve troškove rada pokrivamo
-                iz vlastitih sredstava. Kroz članarinu direktno pomažete radu
-                Udruge, a dužnost svakog tko se naziva Funcutom je da ima
-                vlastitu člansku iskaznicu.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                molestiae amet laborum nam accusamus quod ipsum neque cum earum
+                ducimus aliquam magni, quasi, eligendi exercitationem in
+                perferendis? Autem, officiis dolorum!
               </p>
               <div></div>
               <div>
@@ -215,14 +217,17 @@ function RegistrationSection() {
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>
-                    Ulaznice za našu tribinu moći će se kupiti isključivo uz
-                    predočenje članske iskaznice, i to po povoljnijoj cijeni
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Nemo, rem.
                   </li>
                   <li>
-                    Uz iskaznicu dobivate poklon bon za 10% popusta u našem
-                    webshopu koji uskoro otvaramo
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Laudantium, cum?
                   </li>
-                  <li>Svaki član dobiva i prigodni poklon paket</li>
+                  <li>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Tempore, repudiandae?t
+                  </li>
                 </ul>
               </div>
               <div>
